@@ -12,13 +12,7 @@ For assistance:
 */
 
 
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
-
-//Creates a element
+//Creates an element
 function createElement(elementName, property1, property2, value1, value2) {
    const element = document.createElement(elementName);  
    element[property1] = value1;
@@ -28,15 +22,16 @@ function createElement(elementName, property1, property2, value1, value2) {
    return element;
 }
 
-//Appends a element to desired node
+//Adds element to choosen node
 function appendThis(element, toThisNode) {
    toThisNode.appendChild(element);
    return element;
 }
 
-/* 
-	Retrieves student data and creates a list of students
-	and then displays those student's detials
+
+/*
+Create the `showPage` function
+This function will create and insert/append the elements needed to display a "page" of nine students
 */
 function showPage(list, page) {
    const itemsPerPage = 9;
@@ -64,6 +59,7 @@ function showPage(list, page) {
    }
 }
 
+
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
@@ -81,10 +77,10 @@ function addPagination(list) {
    linkList_UL.addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON') {
          const pageNumber = e.target.textContent;
-         showPage(data, pageNumber)
+         showPage(list, pageNumber)
 			//Changes each buttons className to a empty string
 			//and changes the current button being clicked className to 'active'
-         for (let i = 0; i < buttons; i++) {
+         for (let i = 0; i < buttons + 1; i++) {
            e.target.className = 'active';
            linkList_UL.querySelectorAll('button')[i].className = '';
          }
@@ -92,6 +88,35 @@ function addPagination(list) {
    });
 }
 
-// Call functions
+
+/*
+Creates a search box to dynamically seach for students by
+individual letters, group of letters, or first name 
+*/
+const label = createElement('label', 'for', 'className', 'search', 'student-search');
+appendThis(createElement('span', 'textContent', null, 'Search by name', null), label);
+appendThis(createElement('input', 'id', 'placeholder', 'search', 'search by name...'), label);
+
+const button = createElement('button', 'type', null, 'button', null);
+appendThis(createElement('img', 'src', 'alt', 'img/icn-search.svg', 'Search icon'), button);
+appendThis(button, label);
+
+document.querySelector('h2').insertAdjacentElement('afterend', label);
+
+label.addEventListener('keyup', (e) => {  
+   const matchedStudents = [];
+   for (let i = 0; i < data.length; i++) {
+      const student = data[i];
+      const studentsFirstName = student.name.first.toUpperCase();
+      const whatIsBeingTypedIn = e.target.value.toUpperCase();
+      if (studentsFirstName.startsWith(whatIsBeingTypedIn)) {
+            matchedStudents.push(student);
+            showPage(matchedStudents, 1)
+            addPagination(matchedStudents);
+         }
+   }
+});
+
+//Call functions
 showPage(data, 1);
 addPagination(data);
