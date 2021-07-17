@@ -40,22 +40,22 @@ function showPage(list, page) {
    const studentList_UL = document.querySelector('.student-list');
    studentList_UL.innerHTML = '';
    for (let i = 0; i < list.length; i++) {
-		if (i >= startIndex && i < endIndex) {
-				const student = list[i];
-				const li = createElement('li', 'className', null, 'student-item cf', null);
+	if (i >= startIndex && i < endIndex) {
+		const student = list[i];
+		const li = createElement('li', 'className', null, 'student-item cf', null);
 
-				//Adds students detials to the student-details div element
-				const studentDetails_DIV = appendThis(createElement('div', 'className', 'student-details'), li);
-				appendThis(createElement('img', 'className', 'src', 'avatar', `${student.picture.large}`), studentDetails_DIV);
-				appendThis(createElement('h3', 'textContent', null, `${student.name.first} ${student.name.last}`, null), studentDetails_DIV);
-				appendThis(createElement('span', 'className', 'textContent', 'email', `${student.email}`), studentDetails_DIV);
+		//Adds students detials to the student-details div element
+		const studentDetails_DIV = appendThis(createElement('div', 'className', 'student-details'), li);
+		appendThis(createElement('img', 'className', 'src', 'avatar', `${student.picture.large}`), studentDetails_DIV);
+		appendThis(createElement('h3', 'textContent', null, `${student.name.first} ${student.name.last}`, null), studentDetails_DIV);
+		appendThis(createElement('span', 'className', 'textContent', 'email', `${student.email}`), studentDetails_DIV);
 
-				//Adds student detials to the joined-details div 
-				const joinedDetails_DIV = appendThis(createElement('div', 'className', null, 'joined-details', null), li);
-				appendThis(createElement('span', 'className', 'textContent', 'date', `${student.registered.date}`), joinedDetails_DIV);
+		//Adds student detials to the joined-details div 
+		const joinedDetails_DIV = appendThis(createElement('div', 'className', null, 'joined-details', null), li);
+		appendThis(createElement('span', 'className', 'textContent', 'date', `${student.registered.date}`), joinedDetails_DIV);
 
-				studentList_UL.insertAdjacentElement("beforeend", li);
-		}
+		studentList_UL.insertAdjacentElement("beforeend", li);
+	}
    }
 }
 
