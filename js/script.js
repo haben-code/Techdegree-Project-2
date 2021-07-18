@@ -91,7 +91,9 @@ function addPagination(list) {
 
 /*
 Creates a search box to dynamically seach for students by
-individual letters, group of letters, or first name 
+individual letters, group of letters, or first name
+and displays a no result message for students that do not
+exist within the directory
 */
 const label = createElement('label', 'for', 'className', 'search', 'student-search');
 appendThis(createElement('span', 'textContent', null, 'Search by name', null), label);
