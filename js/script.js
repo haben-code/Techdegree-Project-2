@@ -113,7 +113,10 @@ label.addEventListener('keyup', (e) => {
             matchedStudents.push(student);
             showPage(matchedStudents, 1)
             addPagination(matchedStudents);
-         }
+      } else if (!matchedStudents.length){
+         const noResults_UL = document.querySelector('.student-list');
+         noResults_UL.innerHTML = 'No Results';
+    }
    }
 });
 
