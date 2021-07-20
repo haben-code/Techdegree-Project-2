@@ -80,7 +80,7 @@ function addPagination(list) {
          showPage(list, pageNumber)
 			//Changes each buttons className to a empty string
 			//and changes the current button being clicked className to 'active'
-         for (let i = 0; i < buttons + 1; i++) {
+         for (let i = 0; i < buttons; i++) {
            e.target.className = 'active';
            linkList_UL.querySelectorAll('button')[i].className = '';
          }
@@ -109,15 +109,17 @@ label.addEventListener('keyup', (e) => {
    const matchedStudents = [];
    for (let i = 0; i < data.length; i++) {
       const student = data[i];
-      const studentsFirstName = student.name.first.toUpperCase();
+      const studentsName = student.name.first.toUpperCase() + ' ' + student.name.last.toUpperCase();
       const whatIsBeingTypedIn = e.target.value.toUpperCase();
-      if (studentsFirstName.startsWith(whatIsBeingTypedIn)) {
+      if (studentsName.includes(whatIsBeingTypedIn)) {
             matchedStudents.push(student);
             showPage(matchedStudents, 1)
             addPagination(matchedStudents);
       } else if (!matchedStudents.length){
          const noResults_UL = document.querySelector('.student-list');
+         const clearLinklist_UL = document.querySelector('.link-list')
          noResults_UL.innerHTML = 'No Results';
+         clearLinklist_UL.innerHTML = '';
     }
    }
 });
